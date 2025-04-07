@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - VRR Foods</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="checkout.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Checkout - VRR FOODS</h1>
+  </header>
+  <div id="cart-summary"></div>
+  <ul id="checkout-cart-item"></ul>
+  <h3 id="total-summary"></h3>
+  <ul id="checkout-total"></ul>
+  <section class="payment-mode">
+    <h2>Choose Payment Mode</h2>
+    <label><input type="radio" name="payment" value="UPI" checked> UPI</label>
+    <label><input type="radio" name="payment" value="COD"> Cash on Delivery</label>
+</section>
+    <div class="upi-section"style="display: none;">
+      <p><strong>UPI ID:</strong> 9663248879@ybl</p>
+      <img src="images/upi-qr .png.().jpg" alt="UPI QR Code" class="qr-code"/>
+    </div>
+  
+
+  <section class="customer-details">
+    <h2>Delivery & Order Summary</h2>
+    <p>Before confirming, please fill out your name, address, phone number, and paste your cart items & total in the form.</p>
+    <a href="https://forms.gle/Stmr1PwQHLZ6LsJJ7" target="_blank">
+      <button>Fill Delivery Form</button>
+    </a>
+  </section>
+
+  <section class="vendor">
+    <h2>Vendor Info</h2>
+    <p><strong>Name:</strong> Vidhya Reddy</p>
+    <p><strong>Address:</strong> Railway station parallel road, Near Inayath showroom, 3rd Cross Moksha Beauty Parlour Road, Gauribidanur</p>
+    <p><strong>Phone:</strong> 9663248879 / +91 8088001369</p>
+  </section>
+
+  <button onclick="confirmOrder()">Confirm Order</button>
+
+  <div class="popup" id="thankYouPopup" style="display: none;">
+    <p>Thank you for your order!</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+  <section class="customer-reviews">
+    <h2>Customer Reviews</h2>
+    <iframe src="https://forms.gle/QbMTUTPLQofAjrtcA" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+  </section>
+  
+  <script>
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartContainer = document.getElementById("cart-summary");
+    const totalContainer = document.getElementById("total-summary");
+
+    let total = 0;
+    storedCart.forEach(item => {
+        const p = document.createElement("p");
+        p.textContent = `${item.item} - ₹${item.price}`;
+        cartContainer.appendChild(p);
+        total += item.price;
+    });
+
+    totalContainer.textContent = `Total: ₹${total}`;
+</script>
+</body>
+</html>
